@@ -5,7 +5,7 @@ from langchain_openai import ChatOpenAI
 from langchain.agents import create_agent
 from openai import RateLimitError
 
-from ai.graph.states import GraphState, AgentType
+from ai.graph.states import AgentType
 
 
 class BaseAgent:
