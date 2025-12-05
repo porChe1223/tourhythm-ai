@@ -1,6 +1,7 @@
 langchain
 langchain_core
 langchain_openai
+langchain_tavily
 langgraph
 openai
 pydantic-settings
