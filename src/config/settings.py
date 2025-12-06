@@ -1,3 +1,4 @@
+from pydantic import SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -14,11 +15,11 @@ class Setting(BaseSettings):
     )
 
     # OpenAI
-    OPENAI_API_KEY: str
+    OPENAI_API_KEY: SecretStr
     
     # LangSmith
     ENABLE_LANGSMITH: bool = False
-    LANGCHAIN_TRACING_V2: bool
-    LANGCHAIN_API_KEY: str
-    LANGCHAIN_PROJECT: str
-    LANGCHAIN_ENDPOINT: str
+    LANGCHAIN_TRACING_V2: SecretStr
+    LANGCHAIN_ENDPOINT: SecretStr
+    LANGCHAIN_PROJECT: SecretStr
+    LANGCHAIN_API_KEY: SecretStr
