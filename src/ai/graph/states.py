@@ -13,6 +13,4 @@ class GraphState(MessagesState):
     - This State is Extended from MessagesState
     - If Node returns {"messages": [...]}, it will be Merged with Existing messages in GraphState
     """
-    assignee: AgentType
-
-
+    next_agent: AgentType = None

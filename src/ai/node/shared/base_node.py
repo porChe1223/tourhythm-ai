@@ -1,4 +1,6 @@
+import json
 from langchain_core.messages import AIMessage
+from langgraph.types import Command
 
 from ai.graph.states import GraphState
 
@@ -17,20 +19,17 @@ class BaseNode():
     - update_state: Update State with Agent output
     - process: you should Update process Method in Extended Node
     """
-    def __init__(self, state: GraphState) -> None:
-        self.State = state
-
-
-    def extract_user_input(self) -> str:
-        return self.State["messages"][-1].content
+    def extract_user_input(self, state: GraphState) -> str:
+        return state["messages"][-1].content
     
 
-    def update_state(self, output: str) -> GraphState:
-        return {
-            "messages": [AIMessage(content=output)],
-            "assignee": self.node_type
-        }
+    def update_state(self, output: str) -> Command:
+        return Command(
+            update={
+                "messages": [AIMessage(content=json.dumps(output))]
+            }
+        )
     
     
-    def process(self) -> GraphState:
+    def process(self, state: GraphState) -> GraphState:
         pass

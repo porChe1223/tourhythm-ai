@@ -15,15 +15,14 @@ class TaskNode(BaseNode):
     -------
     - process: Call TaskAgent with extracted user input and update GraphState
     """
-    def __init__(self, state: GraphState) -> None:
-        super().__init__(state)
+    def __init__(self) -> None:
         self.node_type: AgentType = 'Task'
         self.Agent = TaskAgent()
     
     
-    def process(self) -> GraphState:
+    def process(self, state: GraphState) -> GraphState:
         try:
-            user_input = self.extract_user_input()
+            user_input = self.extract_user_input(state)
 
             agent_output = self.Agent.call(user_input)
 
