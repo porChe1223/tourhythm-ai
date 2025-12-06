@@ -1,6 +1,6 @@
 import asyncio
 
-from ai.agent.task.task_agent import TaskAgent
+from ai.agent import TaskAgent
 
 
 async def main():

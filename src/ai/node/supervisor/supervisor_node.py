@@ -1,8 +1,9 @@
 from langgraph.types import Command
 
-from ai.agent.supervisor.supervisor_agent import SupervisorAgent
-from ai.graph.states import AgentType, GraphState
-from ai.node.shared.base_node import BaseNode
+from ai.agent import SupervisorAgent
+from ai.graph.states import GraphState
+from ai.node._shared.base_node import BaseNode
+from ai.node._shared.states import NodeType
 
 
 class SupervisorNode(BaseNode):
@@ -18,7 +19,7 @@ class SupervisorNode(BaseNode):
     - process: Call SupervisorAgent with extracted user input and update GraphState
     """
     def __init__(self) -> None:
-        self.node_type: AgentType = 'Supervisor'
+        self.node_type: NodeType = 'Supervisor'
         self.Agent = SupervisorAgent()
     
     

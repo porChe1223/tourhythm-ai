@@ -7,7 +7,8 @@ from ai.node.general.general_node import GeneralNode
 
 async def main(state: GraphState):
     print(state)
-    updated_state = GeneralNode(state).process()
+    node = GeneralNode()
+    updated_state = node.process(state)
 
     print(updated_state)
 

@@ -1,6 +1,6 @@
 import asyncio
 
-from ai.agent.general.general_agent import GeneralAgent
+from ai.agent import GeneralAgent
 
 
 async def main():

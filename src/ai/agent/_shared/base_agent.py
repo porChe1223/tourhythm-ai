@@ -5,13 +5,13 @@ from langchain_openai import ChatOpenAI
 from langchain.agents import create_agent
 from openai import RateLimitError
 
-from ai.graph.states import AgentType
+from ai.agent._shared.states import AgentType
 
 
 class BaseAgent:
     """
     BaseAgent
-    ----------------
+    ---------
     - All Agents based on this Agent
     - Provide RetryWrapper for handling RateLimitError
     - This Agent does not handle State directly

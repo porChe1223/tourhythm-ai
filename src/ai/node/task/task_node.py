@@ -1,6 +1,8 @@
-from ai.agent.task.task_agent import TaskAgent
-from ai.graph.states import AgentType, GraphState
-from ai.node.shared.base_node import BaseNode
+from ai.agent import TaskAgent
+from ai.graph.states import GraphState
+
+from ai.node._shared.base_node import BaseNode
+from ai.node._shared.states import NodeType
 
 
 class TaskNode(BaseNode):
@@ -16,7 +18,7 @@ class TaskNode(BaseNode):
     - process: Call TaskAgent with extracted user input and update GraphState
     """
     def __init__(self) -> None:
-        self.node_type: AgentType = 'Task'
+        self.node_type: NodeType = 'Task'
         self.Agent = TaskAgent()
     
     

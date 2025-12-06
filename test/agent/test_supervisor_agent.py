@@ -1,6 +1,6 @@
 import asyncio
 
-from ai.agent.supervisor.supervisor_agent import SupervisorAgent
+from ai.agent import SupervisorAgent
 
 
 async def main():

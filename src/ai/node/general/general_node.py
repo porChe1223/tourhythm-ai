@@ -1,9 +1,9 @@
-import json
 from langgraph.types import Command
 
-from ai.agent.general.general_agent import GeneralAgent
-from ai.graph.states import AgentType, GraphState
-from ai.node.shared.base_node import BaseNode
+from ai.agent import GeneralAgent
+from ai.graph.states import GraphState
+from ai.node._shared.base_node import BaseNode
+from ai.node._shared.states import NodeType
 
 
 class GeneralNode(BaseNode):
@@ -19,7 +19,7 @@ class GeneralNode(BaseNode):
     - process: Call GeneralAgent with extracted user input and update GraphState
     """
     def __init__(self) -> None:
-        self.node_type: AgentType = 'General'
+        self.node_type: NodeType = 'General'
         self.Agent = GeneralAgent()
     
     

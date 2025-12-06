@@ -2,9 +2,7 @@ from langgraph.graph.state import CompiledStateGraph
 from langgraph.graph import StateGraph, START, END
 
 from ai.graph.states import GraphState
-from ai.node.supervisor.supervisor_node import SupervisorNode
-from ai.node.general.general_node import GeneralNode
-from ai.node.task.task_node import TaskNode
+from ai.node import GeneralNode, SupervisorNode, TaskNode
 
 
 class MultiAgentGraph:

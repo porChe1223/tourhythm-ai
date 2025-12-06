@@ -7,7 +7,8 @@ from ai.node.supervisor.supervisor_node import SupervisorNode
 
 async def main(state: GraphState):
     print(state)
-    updated_state = SupervisorNode(state).process()
+    node = SupervisorNode()
+    updated_state = node.process(state)
 
     print(updated_state)
 

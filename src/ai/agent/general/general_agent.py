@@ -1,5 +1,5 @@
-from ai.agent.shared.base_agent import BaseAgent
-from ai.agent.shared.models import basic_openai
+from ai.agent._shared.base_agent import BaseAgent
+from ai.agent._shared.models import basic_openai
 from ai.agent.general.general_prompt import GENERAL_PROMPT
 
 

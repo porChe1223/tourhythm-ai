@@ -7,7 +7,8 @@ from ai.node.task.task_node import TaskNode
 
 async def main(state: GraphState):
     print(state)
-    updated_state = TaskNode(state).process()
+    node = TaskNode()
+    updated_state = node.process(state)
 
     print(updated_state)
 
