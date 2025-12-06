@@ -1,8 +1,10 @@
+import time
 from langgraph.graph.state import CompiledStateGraph
 from langgraph.graph import StateGraph, START, END
 
 from ai.graph.states import GraphState
 from ai.node import GeneralNode, SupervisorNode, TaskNode
+from log import AgentGraphLogger
 
 
 class MultiAgentGraph:
@@ -43,6 +45,9 @@ class MultiAgentGraph:
     
 
     def execute(self, input: dict):
+        self.agent_graph_logger = AgentGraphLogger()
+        start_time = time.time()
+        
         try:
             # Build
             compiled_graph = self.build_graph()
@@ -50,7 +55,23 @@ class MultiAgentGraph:
             # Execute
             result = compiled_graph.invoke(input)
             
+            # Logging Graph
+            self.agent_graph_logger.log_graph(
+                input_data=input,
+                output_data=result,
+                execution_time=(time.time() - start_time)
+            )
+            
             return result
             
         except Exception as e:
+            execution_time = time.time() - start_time
+            
+            # Logging error
+            self.agent_graph_logger.log_graph(
+                input_data=input,
+                error=e,
+                execution_time=execution_time
+            )
+            
             raise e
