@@ -56,14 +56,14 @@ class BaseAgent:
 
             # Return Response in Dict format
             return {
-                "messages": response["messages"][-1].content,
+                "output": response["messages"][-1].content,
                 "assignee": self.AgentType
             }
 
         except Exception as e:
             error_message = f"Error from {self.AgentType} Agent: {e}"
             return {
-                "messages": error_message,
+                "output": error_message,
                 "assignee": self.AgentType
             }
 
