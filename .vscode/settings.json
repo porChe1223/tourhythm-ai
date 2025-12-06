@@ -1,0 +1,15 @@
+{
+  "editor.formatOnSave": true,
+  "[python]": {
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit",
+      "source.organizeImports": "explicit"
+    }
+  },
+  "python.defaultInterpreterPath": "${workspaceFolder}/ai/.venv/bin/python",
+  "editor.quickSuggestions": {
+    "strings": true
+  }
+}

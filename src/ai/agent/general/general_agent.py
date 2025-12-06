@@ -12,4 +12,7 @@ class GeneralAgent(BaseAgent):
     - No Tools
     """
     def __init__(self) -> None:
-        super().__init__('General', basic_openai, GENERAL_PROMPT)
+        super().__init__('General',
+                         basic_openai,
+                         GENERAL_PROMPT,
+                         tool_list=None)
