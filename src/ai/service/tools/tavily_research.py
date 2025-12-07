@@ -4,7 +4,7 @@ from tenacity import retry, stop_after_attempt, wait_fixed
 
 
 @tool
-def tavily_research(query: str) -> str:
+def tavily_research_tool(query: str) -> str:
     """
     TavilyResearch Tool
     --------------------

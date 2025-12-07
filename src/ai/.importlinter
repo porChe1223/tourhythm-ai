@@ -1,0 +1,52 @@
+[importlinter]
+root_packages =
+    service
+    agent
+    node
+    graph
+
+
+[importlinter:contract:1]
+name = layered architecture contract
+type = layers
+layers =    
+    service
+    agent
+    node
+    graph
+
+[importlinter:contract:2]
+name = service should not depend on agent/node/graph
+type = forbidden
+source_modules = 
+    service
+forbidden_modules = 
+    agent
+    node
+    graph
+
+[importlinter:contract:2]
+name = agent should not depend on node/graph
+type = forbidden
+source_modules = 
+    agent
+forbidden_modules = 
+    node
+    graph
+
+[importlinter:contract:3]
+name = node should not depend on graph
+type = forbidden
+source_modules = 
+    node
+forbidden_modules = 
+    graph
+
+[importlinter:contract:4]
+name = graph should not depend on service/agent
+type = forbidden
+source_modules = 
+    graph
+forbidden_modules = 
+    service
+    agent

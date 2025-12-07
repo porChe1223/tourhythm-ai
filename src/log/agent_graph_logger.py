@@ -122,7 +122,7 @@ class AgentGraphLogger:
         self.log_to_stdout("graph_execution", log_data)
 
         if self.langsmith_client.is_enabled:
-            print(f"✅ LangSmith auto-tracing active for graph execution")
+            print("✅ LangSmith auto-tracing active for graph execution")
     
 
     def make_serializable(self, obj: Any) -> Dict[str, Any]:
