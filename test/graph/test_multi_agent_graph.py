@@ -1,9 +1,8 @@
 import asyncio
 from langchain_core.messages import HumanMessage
 
-from ai.graph import GraphState, MultiAgentGraph
-
-
+from ai.node import GraphState
+from ai.graph import MultiAgentGraph
 
 
 async def main():

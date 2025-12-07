@@ -2,7 +2,7 @@ import json
 from langchain_core.messages import AIMessage
 from langgraph.types import Command
 
-from ai.graph.states import GraphState
+from ai.node.states import GraphState
 
 
 class BaseNode():

@@ -1,6 +1,5 @@
 from ai.agent import TaskAgent
-from ai.graph.states import GraphState
-
+from ai.node.states import GraphState
 from ai.node._shared.base_node import BaseNode
 from ai.node._shared.states import NodeType
 

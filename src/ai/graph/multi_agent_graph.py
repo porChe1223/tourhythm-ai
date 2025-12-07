@@ -2,8 +2,7 @@ import time
 from langgraph.graph.state import CompiledStateGraph
 from langgraph.graph import StateGraph, START, END
 
-from ai.graph.states import GraphState
-from ai.node import GeneralNode, SupervisorNode, TaskNode
+from ai.node import GeneralNode, GraphState, SupervisorNode, TaskNode
 from log import AgentGraphLogger
 
 
