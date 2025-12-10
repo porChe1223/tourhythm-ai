@@ -6,7 +6,7 @@ from ai.graph import MultiAgentGraph
 
 
 async def main():
-    input = "来週水曜日の昼に京都の金閣寺に福岡から観光に行きたい。何をすればいい？"
+    input = "来週に京都に福岡から観光に行きたい。どの時間帯がおすすめ？"
     
 
     multi_agent_graph = MultiAgentGraph()

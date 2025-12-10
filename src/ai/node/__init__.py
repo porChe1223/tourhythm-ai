@@ -25,14 +25,18 @@ Methods
 """
 
 from ai.node.general.general_node import GeneralNode
+from ai.node.schedule.schedule_node import ScheduleNode
 from ai.node.supervisor.supervisor_node import SupervisorNode
 from ai.node.states import GraphState
 from ai.node.task.task_node import TaskNode
+from ai.node.trip.trip_node import TripNode
 
 
 __all__ = [
     'GeneralNode',
     'GraphState',
+    'ScheduleNode',
     'SupervisorNode',
     'TaskNode',
+    'TripNode'
 ]

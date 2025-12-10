@@ -3,7 +3,7 @@ import time
 from langgraph.graph.state import CompiledStateGraph
 from langgraph.graph import StateGraph, START, END
 
-from ai.node import GeneralNode, GraphState, SupervisorNode, TaskNode
+from ai.node import GeneralNode, GraphState, ScheduleNode, SupervisorNode, TaskNode, TripNode
 from log import AgentGraphLogger
 
 
@@ -26,10 +26,10 @@ class MultiAgentGraph:
         if not next_agent:
             return 'General'
 
-        if next_agent == 'Supervisor':
-            return 'Supervisor'
-        elif next_agent == 'General':
-            return 'General'
+        if next_agent == 'Trip':
+            return 'Trip'
+        elif next_agent == 'Schedule':
+            return 'Schedule'
         elif next_agent == 'Task':
             return 'Task'
         
@@ -43,6 +43,8 @@ class MultiAgentGraph:
         # --- Nodes ---
         graph.add_node('Supervisor', SupervisorNode().process)
         graph.add_node('General', GeneralNode().process)
+        graph.add_node('Trip', TripNode().process)
+        graph.add_node('Schedule', ScheduleNode().process)
         graph.add_node('Task', TaskNode().process)
 
         # --- Edges ---
@@ -55,12 +57,16 @@ class MultiAgentGraph:
             self.assign_node_types,
             {
                 "General": 'General',
+                "Trip": 'Trip',
+                "Schedule": 'Schedule',
                 "Task": 'Task'
             }
         )
         
         # from Agents to END
         graph.add_edge("General", END)
+        graph.add_edge("Trip", END)
+        graph.add_edge("Schedule", END)
         graph.add_edge("Task", END)
 
         # --- Compile Graph ---
