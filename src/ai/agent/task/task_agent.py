@@ -14,5 +14,4 @@ class TaskAgent(BaseAgent):
     def __init__(self) -> None:
         super().__init__('Task',
                          basic_openai,
-                         TASK_PROMPT,
-                         tool_list=[tavily_research_tool])
+                         TASK_PROMPT)

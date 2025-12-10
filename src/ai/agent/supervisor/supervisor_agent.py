@@ -7,5 +7,4 @@ class SupervisorAgent(BaseAgent):
     def __init__(self) -> None:
         super().__init__('Supervisor',
                          basic_openai,
-                         SUPERVISOR_PROMPT,
-                         tool_list=None)
+                         SUPERVISOR_PROMPT)

@@ -2,6 +2,7 @@ from ai.agent import TaskAgent
 from ai.node.states import GraphState
 from ai.node._shared.base_node import BaseNode
 from ai.node._shared.states import NodeType
+from ai.service.tools.tavily_research import tavily_research_tool
 
 
 class TaskNode(BaseNode):
@@ -25,7 +26,7 @@ class TaskNode(BaseNode):
         try:
             user_input = self.extract_user_input(state)
 
-            agent_output = self.Agent.call(user_input)
+            agent_output = self.Agent.call(user_input, [tavily_research_tool])
 
             return self.update_state(agent_output["messages"])
             

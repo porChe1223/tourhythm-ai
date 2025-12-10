@@ -14,5 +14,4 @@ class GeneralAgent(BaseAgent):
     def __init__(self) -> None:
         super().__init__('General',
                          basic_openai,
-                         GENERAL_PROMPT,
-                         tool_list=None)
+                         GENERAL_PROMPT)

@@ -1,8 +1,7 @@
 import asyncio
 from langchain_core.messages import HumanMessage
 
-from ai.node.states import GraphState
-from ai.node.task.task_node import TaskNode
+from ai.node import GraphState, TaskNode
 
 
 async def main(state: GraphState):
