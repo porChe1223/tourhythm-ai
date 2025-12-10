@@ -1,4 +1,6 @@
+import json
 from langgraph.types import Command
+from langchain_core.messages import AIMessage
 
 from ai.agent import SupervisorAgent
 from ai.node.states import GraphState
@@ -29,7 +31,13 @@ class SupervisorNode(BaseNode):
 
             agent_output = self.Agent.call(user_input)
 
-            return self.update_state(agent_output)
+            
+
+            return Command(
+                update={
+                    "messages": [AIMessage(content=json.dumps(agent_output))],
+                }
+            )
             
         except Exception as e:
             error_message = f"Error in {self.node_type} Node processing: {str(e)}"

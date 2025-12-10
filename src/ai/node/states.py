@@ -1,6 +1,7 @@
 from langgraph.graph import MessagesState
 
 from ai.node._shared.states import NodeType
+from ai.agent._shared.states import AgentType
 
 
 class GraphState(MessagesState):
@@ -14,3 +15,4 @@ class GraphState(MessagesState):
     - This State is Extended from MessagesState Logic
     """
     assignee: NodeType = None
+    next_agent: AgentType = None
