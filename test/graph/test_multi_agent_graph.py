@@ -12,8 +12,7 @@ async def main():
     multi_agent_graph = MultiAgentGraph()
 
     multi_agent_graph.execute(GraphState(
-        messages=[HumanMessage(content=input)],
-        assignee=None
+        messages=[HumanMessage(content=input)]
     ))
 
 

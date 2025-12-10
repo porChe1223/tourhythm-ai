@@ -1,4 +1,4 @@
 from typing import Literal
 
 
-NodeType = Literal['Supervisor', 'Trip', 'Schedule', 'Task', 'General', 'Finisher']
+NodeType = Literal['Supervisor', 'Trip', 'Schedule', 'Task', 'General']

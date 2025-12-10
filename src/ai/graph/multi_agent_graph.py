@@ -1,3 +1,4 @@
+import json
 import time
 from langgraph.graph.state import CompiledStateGraph
 from langgraph.graph import StateGraph, START, END
@@ -14,6 +15,25 @@ class MultiAgentGraph:
 
     def __init__(self) -> None:
         self.State = GraphState
+    
+
+    def assign_node_types(self, state: GraphState) -> str:
+        messages = state.get("messages", None)
+        if not messages:
+            return 'General'
+        
+        next_agent = json.loads(messages[-1].content).get("next_agent", None)
+        if not next_agent:
+            return 'General'
+
+        if next_agent == 'Supervisor':
+            return 'Supervisor'
+        elif next_agent == 'General':
+            return 'General'
+        elif next_agent == 'Task':
+            return 'Task'
+        
+        return 'General'
 
 
     def build_graph(self) -> CompiledStateGraph:
@@ -23,15 +43,21 @@ class MultiAgentGraph:
         # --- Nodes ---
         graph.add_node('Supervisor', SupervisorNode().process)
         graph.add_node('General', GeneralNode().process)
-        # graph.add_node('Trip', self.Node.trip_node)
-        # graph.add_node('Scheduler', self.Node.scheduler_node)
         graph.add_node('Task', TaskNode().process)
 
         # --- Edges ---
         # from START to Supervisor
         graph.add_edge(START, "Supervisor")
 
-        graph.add_edge("Supervisor", 'Task')  #TODO: This is For test, should be Conditional Edges
+        # from Supervisor to General / Task
+        graph.add_conditional_edges(
+            "Supervisor",
+            self.assign_node_types,
+            {
+                "General": 'General',
+                "Task": 'Task'
+            }
+        )
         
         # from Agents to END
         graph.add_edge("General", END)
