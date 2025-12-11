@@ -1,7 +1,7 @@
-from sqlalchemy.orm import Session
 from typing import List
 
 from infra.database.models import ChatSession, ChatMessage
+from infra.database._database import DBSession, close_db
 
 
 class ChatRepository:
@@ -16,14 +16,17 @@ class ChatRepository:
     - add_messages: Add multiple messages to chat session in batch
     - get_messages_by_assignee: Get all messages by specific assignee
     """
-    def __init__(self, db: Session):
-        self.db = db
+    def __init__(self):
+        self.db = DBSession()
 
         
     def create_session(self, session: ChatSession) -> ChatSession:
         """Create a new chat session"""
         self.db.add(session)
         self.db.commit()
+
+        close_db(self.db)
+
         return session
     
     
@@ -34,13 +37,20 @@ class ChatRepository:
         """
         self.db.add_all(messages)
         self.db.commit()
+
+        close_db(self.db)
+
         return messages
     
 
     def get_messages_by_assignee(self, assignee: str) -> List[ChatMessage]:
         """Get all messages by specific assignee"""
-        return (
+        messages = (
             self.db.query(ChatMessage)
             .filter(ChatMessage.assignee == assignee)
             .all()
         )
+
+        close_db(self.db)
+
+        return messages

@@ -27,16 +27,20 @@ database = TouristAIDatabase()
 engine = create_engine(database.database_url)
 
 # Session factory
-Session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+DBSession = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Base class for models
 Base = declarative_base()
 
 
 def get_db():
-    db = Session()
+    db = DBSession()
     
     try:
         yield db
     finally:
         db.close()
+
+
+def close_db(db):
+    db.close()

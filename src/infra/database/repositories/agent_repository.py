@@ -1,7 +1,7 @@
-from sqlalchemy.orm import Session
 from typing import Optional, Any
 
 from infra.database.models import Agent
+from infra.database._database import DBSession, close_db
 
 
 class AgentRepository:
@@ -15,8 +15,8 @@ class AgentRepository:
     - update_field: Update specific field of agent
     - get_field: Get specific field value of agent
     """
-    def __init__(self, db: Session):
-        self.db = db
+    def __init__(self):
+        self.db = DBSession()
 
 
     def update_field(self, agent_name: str, field_name: str, value: Any) -> Optional[Agent]:
@@ -27,8 +27,11 @@ class AgentRepository:
             setattr(agent, field_name, value)
             self.db.commit()
 
+            close_db(self.db)
+
             return agent
         
+        close_db(self.db)
         return None
     
 
@@ -37,6 +40,10 @@ class AgentRepository:
         agent = self.db.query(Agent).filter(Agent.name == agent_name)
 
         if agent:
-            return getattr(agent, field_name, None)
+            field = getattr(agent, field_name, None)
+            close_db(self.db)
+            
+            return field
         
+        close_db(self.db)
         return None
