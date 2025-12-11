@@ -1,6 +1,6 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, BackgroundTasks
 
-from app.service import AIChatService
+from app.service import AIChatService, save_chat_data
 from app.schemas import ChatRequest, ChatResponse
 
 
@@ -14,9 +14,16 @@ ai_chat_service = AIChatService()
 
 # API Endpoints
 @app.post("/chat", response_model=ChatResponse)
-async def chat(request: ChatRequest):
+async def chat(request: ChatRequest, background_tasks: BackgroundTasks):
     try:
-        response_content = ai_chat_service.chat(request.message)
+        # Get AI chat response
+        response_content, full_result = ai_chat_service.chat(request.message)
+        
+        # Save Messages in Background
+        background_tasks.add_task(
+            save_chat_data,
+            full_result
+        )
         
         return ChatResponse(response=response_content)
         

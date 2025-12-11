@@ -22,12 +22,20 @@ class ChatRepository:
         
     def create_session(self, session: ChatSession) -> ChatSession:
         """Create a new chat session"""
-        self.db.add(session)
-        self.db.commit()
+        try:
+            self.db.add(session)
+            self.db.commit()
+            
+            self.db.refresh(session)
+            
+            close_db(self.db)
+            
+            return session
+        except Exception as e:
+            self.db.rollback()
+            close_db(self.db)
 
-        close_db(self.db)
-
-        return session
+            raise e
     
     
     def add_messages(self, messages: List[ChatMessage]) -> List[ChatMessage]:
@@ -35,22 +43,33 @@ class ChatRepository:
         Add multiple messages to chat session in batch.  
         Batch size would not be bigger than 26, so splitting is not necessary
         """
-        self.db.add_all(messages)
-        self.db.commit()
+        try:
+            self.db.add_all(messages)
+            self.db.commit()
+            
+            close_db(self.db)
+            
+            return messages
+        except Exception as e:
+            self.db.rollback()
+            close_db(self.db)
 
-        close_db(self.db)
-
-        return messages
+            raise e
     
 
     def get_messages_by_assignee(self, assignee: str) -> List[ChatMessage]:
         """Get all messages by specific assignee"""
-        messages = (
-            self.db.query(ChatMessage)
-            .filter(ChatMessage.assignee == assignee)
-            .all()
-        )
+        try:
+            messages = (
+                self.db.query(ChatMessage)
+                .filter(ChatMessage.assignee == assignee)
+                .all()
+            )
+            
+            close_db(self.db)
+            
+            return messages
+        except Exception as e:
+            close_db(self.db)
 
-        close_db(self.db)
-
-        return messages
+            raise e

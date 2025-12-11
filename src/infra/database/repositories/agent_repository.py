@@ -19,31 +19,40 @@ class AgentRepository:
         self.db = DBSession()
 
 
-    def update_field(self, agent_name: str, field_name: str, value: Any) -> Optional[Agent]:
+    def update_field(self, agent_name: str, field_name: str, value: Any) -> None:
         """Update specific field of agent"""
-        agent = self.db.query(Agent).filter(Agent.name == agent_name)
+        try:
+            agent = self.db.query(Agent).filter(Agent.name == agent_name).first()
 
-        if agent:
-            setattr(agent, field_name, value)
-            self.db.commit()
+            if agent:
+                setattr(agent, field_name, value)
+                self.db.commit()
 
+                close_db(self.db)
+
+                return agent
+            
+            close_db(self.db)
+        except Exception as e:
+            self.db.rollback()
             close_db(self.db)
 
-            return agent
-        
-        close_db(self.db)
-        return None
+            raise e
     
 
-    def get_field(self, agent_name: str, field_name: str) -> Any:
+    def get_field(self, agent_name: str, field_name: str) -> None:
         """Get specific field value of agent"""
-        agent = self.db.query(Agent).filter(Agent.name == agent_name)
+        try:
+            agent = self.db.query(Agent).filter(Agent.name == agent_name)
 
-        if agent:
-            field = getattr(agent, field_name, None)
-            close_db(self.db)
+            if agent:
+                field = getattr(agent, field_name, None)
+                close_db(self.db)
+                
+                return field
             
-            return field
-        
-        close_db(self.db)
-        return None
+            close_db(self.db)
+        except Exception as e:
+            close_db(self.db)
+
+            raise e
