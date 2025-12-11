@@ -6,3 +6,6 @@ langchain_tavily
 langgraph
 openai
 pydantic-settings
+fastapi
+uvicorn
+pydantic

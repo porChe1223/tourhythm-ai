@@ -1,7 +1,5 @@
 import asyncio
-from langchain_core.messages import HumanMessage
 
-from ai.node import GraphState
 from ai.graph import MultiAgentGraph
 
 
@@ -11,9 +9,7 @@ async def main():
 
     multi_agent_graph = MultiAgentGraph()
 
-    multi_agent_graph.execute(GraphState(
-        messages=[HumanMessage(content=input)]
-    ))
+    multi_agent_graph.execute(input)
 
 
 if __name__ == "__main__":

@@ -1,5 +1,6 @@
 import json
 import time
+from langchain_core.messages import HumanMessage
 from langgraph.graph.state import CompiledStateGraph
 from langgraph.graph import StateGraph, START, END
 
@@ -84,7 +85,9 @@ class MultiAgentGraph:
             compiled_graph = self.build_graph()
             
             # Execute
-            result = compiled_graph.invoke(input)
+            result = compiled_graph.invoke(
+                GraphState(messages=[HumanMessage(content=input)])
+            )
             
             # Logging Graph
             self.agent_graph_logger.log_graph(
