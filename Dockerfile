@@ -17,4 +17,4 @@ COPY src /code/src
 # Install application
 RUN /bin/uv pip install --system -e .
 
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "9000"]
+CMD ["uvicorn", "src.app:app", "--host", "0.0.0.0", "--port", "9000"]

@@ -31,26 +31,26 @@ class AgentGraphLogger:
         print(f"[LOG] {json.dumps(log_entry, ensure_ascii=False, indent=2)}")
 
     
-    def log_tool(
-        self,
-        tool_name: str,
-        input_data,
-        output_data = None,
-        error: Exception = None,
-        execution_time: float = None
-    ):
-        log_data = {
-            "tool_name": tool_name,
-            "input": str(input_data) | None,
-            "output": str(output_data) | None,
-            "error": str(error) | None,
-            "execution_time": execution_time
-        }
+    # def log_tool(
+    #     self,
+    #     tool_name: str,
+    #     input_data,
+    #     output_data = None,
+    #     error: Exception = None,
+    #     execution_time: float = None
+    # ):
+    #     log_data = {
+    #         "tool_name": tool_name,
+    #         "input": str(input_data) | None,
+    #         "output": str(output_data) | None,
+    #         "error": str(error) | None,
+    #         "execution_time": execution_time
+    #     }
         
-        self.log_to_stdout("tool_execution", log_data)
+    #     self.log_to_stdout("tool_execution", log_data)
         
-        if self.langsmith_client.is_enabled:
-            print(f"✅ LangSmith auto-tracing active for tool: {tool_name}")
+    #     if self.langsmith_client.is_enabled:
+    #         print(f"✅ LangSmith auto-tracing active for tool: {tool_name}")
 
 
     # def log_agent(
