@@ -6,3 +6,18 @@ services:
       - "9000:9000"
     env_file:
       - .env
+    depends_on: # Start app after database is ready 
+      - tourist-ai-db
+
+  tourist-ai-db:
+    container_name: tourist-ai-db
+    image: postgres:15
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    volumes: # persist data
+      - tourist-ai-data:/var/lib/postgresql/data
+
+volumes:
+  tourist-ai-data:
