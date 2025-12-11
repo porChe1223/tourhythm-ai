@@ -23,3 +23,9 @@ class Setting(BaseSettings):
     LANGCHAIN_ENDPOINT: SecretStr
     LANGCHAIN_PROJECT: SecretStr
     LANGCHAIN_API_KEY: SecretStr
+
+    # Database
+    POSTGRES_HOST: SecretStr
+    POSTGRES_DB: SecretStr
+    POSTGRES_USER: SecretStr
+    POSTGRES_PASSWORD: SecretStr

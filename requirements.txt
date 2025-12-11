@@ -1,3 +1,4 @@
+fastapi
 import-linter
 langchain
 langchain_core
@@ -5,7 +6,8 @@ langchain_openai
 langchain_tavily
 langgraph
 openai
-pydantic-settings
-fastapi
-uvicorn
 pydantic
+pydantic-settings
+psycopg2-binary
+SQLAlchemy
+uvicorn
