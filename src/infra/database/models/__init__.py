@@ -1,6 +1,9 @@
-from infra.database.models.common.chat_session import ChatSession
+from infra.database.models.agent import Agent
+from infra.database.models.chat import ChatMessage, ChatSession
 
 
 __all__ = [
-    "ChatSession"
+    "Agent",
+    "ChatMessage",
+    "ChatSession",
     ]

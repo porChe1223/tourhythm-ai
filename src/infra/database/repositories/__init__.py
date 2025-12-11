@@ -1,8 +1,8 @@
-from infra.database.repositories.app.chat_session_repository import AppChatSessionRepository
-from infra.database.repositories.optim.chat_session_repository import OptimChatSessionRepository
+from infra.database.repositories.agent_repository import AgentRepository
+from infra.database.repositories.chat_repository import ChatRepository
 
 
 __all__ = [
-    "AppChatSessionRepository",
-    "OptimChatSessionRepository"
+    "AgentRepository",
+    "ChatRepository",
     ]
