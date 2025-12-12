@@ -1,10 +1,16 @@
+import asyncio
 from ai.agent import DeclarativeGeneralAgent
 
 
-if __name__ == "__main__":
-
+async def main():
     agent = DeclarativeGeneralAgent()
-
-    result = agent(input="来週の午前中に京都の金閣寺に観光に行きたい。準備すべきタスクを提案して。")
+    
+    input_text = "来週京都の金閣寺に観光に行きたい。どの時間帯で行けば良いか提案して。"
+    
+    result = agent(input=input_text)
 
     print(result)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())

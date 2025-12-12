@@ -19,9 +19,15 @@ Can Not Do
 
 Methods
 -------
+- DeclarativeGeneralAgent: General Purpose Agent using Declarative Approach
+- DeclarativeScheduleAgent: Schedule Suggestion Agent using Declarative Approach
+- DeclarativeTaskAgent: Task Suggestion Agent using Declarative Approach
+- DeclarativeTripAgent: Trip Suggestion Agent using Declarative Approach
 - GeneralAgent: General Purpose Agent
+- ScheduleAgent: Schedule Suggestion Agent for suggesting schedule based on user's trip plan
 - SupervisorAgent: Managing Agent for supervising
 - TaskAgent: Task Suggestion Agent for suggesting necessary baggage/todo to achieve user's goal
+- TripAgent: Trip Suggestion Agent for suggesting trip plan based on user's preferences
 """
 
 from ai.agent.general import DeclarativeGeneralAgent, GeneralAgent

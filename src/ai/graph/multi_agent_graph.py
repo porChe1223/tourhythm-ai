@@ -4,7 +4,7 @@ from langchain_core.messages import HumanMessage
 from langgraph.graph.state import CompiledStateGraph
 from langgraph.graph import StateGraph, START, END
 
-from ai.node import GeneralNode, GraphState, ScheduleNode, SupervisorNode, TaskNode, TripNode
+from ai.node import GeneralNode, GraphState, NodeType, ScheduleNode, SupervisorNode, TaskNode, TripNode
 from log import AgentGraphLogger
 
 
@@ -18,7 +18,7 @@ class MultiAgentGraph:
         self.State = GraphState
     
 
-    def assign_node_types(self, state: GraphState) -> str:
+    def assign_node_types(self, state: GraphState) -> NodeType:
         messages = state.get("messages", None)
         if not messages:
             return 'General'

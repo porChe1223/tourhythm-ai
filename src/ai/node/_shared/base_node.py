@@ -26,7 +26,7 @@ class BaseNode():
     def update_state(self, output: str) -> Command:
         return Command(
             update={
-                "messages": [AIMessage(content=json.dumps(output))]
+                "messages": [AIMessage(content=json.dumps(output, ensure_ascii=False))]
             }
         )
     

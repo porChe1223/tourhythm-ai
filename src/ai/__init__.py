@@ -1,4 +1,4 @@
-from ai.graph.multi_agent_graph import MultiAgentGraph
+from ai.graph import MultiAgentGraph
 
 
 __all__ = [

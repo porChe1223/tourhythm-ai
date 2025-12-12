@@ -3,9 +3,8 @@ from langgraph.types import Command
 from langchain_core.messages import AIMessage
 
 from ai.agent import SupervisorAgent
-from ai.node.states import GraphState
-from ai.node._shared.base_node import BaseNode
-from ai.node._shared.states import NodeType
+from ai.node.states import GraphState, NodeType
+from ai.node._shared import BaseNode
 
 
 class SupervisorNode(BaseNode):

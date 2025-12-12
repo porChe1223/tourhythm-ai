@@ -1,7 +1,8 @@
 from langgraph.graph import MessagesState
+from typing import Literal
 
-from ai.node._shared.states import NodeType
-from ai.agent._shared.states import AgentType
+
+NodeType = Literal['Supervisor', 'Trip', 'Schedule', 'Task', 'General']
 
 
 class GraphState(MessagesState):
@@ -15,4 +16,4 @@ class GraphState(MessagesState):
     - This State is Extended from MessagesState Logic
     """
     assignee: NodeType = None
-    next_agent: AgentType = None
+    next_agent: NodeType = None
