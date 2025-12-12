@@ -4,7 +4,7 @@ from langchain_core.messages import HumanMessage
 from langgraph.graph.state import CompiledStateGraph
 from langgraph.graph import StateGraph, START, END
 
-from ai.node import GeneralNode, GraphState, NodeType, ScheduleNode, SupervisorNode, TaskNode, TripNode
+from ai.node import DeclarativeGeneralNode, GraphState, NodeType, DeclarativeScheduleNode, DeclarativeTaskNode, DeclarativeTripNode, SupervisorNode
 from log import AgentGraphLogger
 
 
@@ -43,10 +43,10 @@ class MultiAgentGraph:
 
         # --- Nodes ---
         graph.add_node('Supervisor', SupervisorNode().process)
-        graph.add_node('General', GeneralNode().process)
-        graph.add_node('Trip', TripNode().process)
-        graph.add_node('Schedule', ScheduleNode().process)
-        graph.add_node('Task', TaskNode().process)
+        graph.add_node('General', DeclarativeGeneralNode().process)
+        graph.add_node('Trip', DeclarativeTripNode().process)
+        graph.add_node('Schedule', DeclarativeScheduleNode().process)
+        graph.add_node('Task', DeclarativeTaskNode().process)
 
         # --- Edges ---
         # from START to Supervisor
