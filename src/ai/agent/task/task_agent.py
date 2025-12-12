@@ -39,18 +39,19 @@ class DeclarativeTaskAgent(dspy.Module):
     """
     Declarative Task Agent
     ----------------------
-    - Agent for Task Tasks
+    - Agent for Suggesting Tasks which are necessary for achieving the user's goal
     - Using DSPy framework
-    - Using Chain of Thought reasoning for complex tasks
+    - Using Chain of Thought
     - Returns structured JSON format with output and assignee fields
     """
     def __init__(self):
         super().__init__()
-        dspy_openai()
+        self.lm = dspy_openai()
         self.agent = dspy.ChainOfThought(TaskSignature)
 
     def forward(self, input: str) -> Dict[str, AgentType]:
-        result = self.agent(input=input)
+        with dspy.context(lm=self.lm):
+            result = self.agent(input=input)
 
         return {
             "output": result.response,

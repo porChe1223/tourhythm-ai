@@ -33,9 +33,9 @@ def structured_openai(structure):
 
 def dspy_openai():
     """
-    Configure DSPy OpenAI model
+    Create OpenAI model for use with dspy.context()
     """
-    dspy.configure(lm=dspy.LM(
+    return dspy.LM(
         model='openai/gpt-4o-mini',
         api_key=Setting().OPENAI_API_KEY.get_secret_value()
-    ))
+    )

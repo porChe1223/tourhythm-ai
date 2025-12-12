@@ -38,18 +38,19 @@ class DeclarativeScheduleAgent(dspy.Module):
     """
     Declarative Schedule Agent
     ----------------------
-    - Agent for Schedule Tasks
+    - Agent for Suggesting Schedules which are necessary for achieving the user's goal.
     - Using DSPy framework
-    - Using Chain of Thought reasoning for complex tasks
+    - Using Chain of Thought
     - Returns structured JSON format with output and assignee fields
     """
     def __init__(self):
         super().__init__()
-        dspy_openai()
+        self.lm = dspy_openai()
         self.agent = dspy.ChainOfThought(ScheduleSignature)
 
     def forward(self, input: str) -> Dict[str, AgentType]:
-        result = self.agent(input=input)
+        with dspy.context(lm=self.lm):
+            result = self.agent(input=input)
 
         return {
             "output": result.response,
