@@ -24,22 +24,10 @@ def save_chat_data(messages: List[Any]):
         content = ""
         assignee = None
         message_id = getattr(message, 'id', str(uuid.uuid4()))
-        
-        # Convert message to HumanMessage or AIMessage
-        if message_type == "HumanMessage":
-            raw_content = getattr(message, 'content', '')
-            # Parse JSON
-            try:
-                parsed_content = json.loads(raw_content.strip())
-                content = parsed_content.get('output', raw_content)
-                assignee = "human"
 
-            except json.JSONDecodeError:
-                content = raw_content
-            
-        elif message_type == "AIMessage":
+        # Pick content and assignee
+        if message_type in ['HumanMessage', 'AIMessage']:
             raw_content = getattr(message, 'content', '')
-            # Parse JSON
             try:
                 parsed_content = json.loads(raw_content.strip())
                 assignee = parsed_content.get('assignee')
@@ -48,17 +36,17 @@ def save_chat_data(messages: List[Any]):
             except json.JSONDecodeError:
                 assignee = None
                 content = raw_content
-                
         else:
             content = str(message)
-        
+            assignee = None
+
+        # Add processed message dict
         processed_message = {
             'id': message_id,
             'content': content,
             'assignee': assignee,
             'order_index': order_index
         }
-
         formatted_messages.append(processed_message)
 
     # --- Save to database ---

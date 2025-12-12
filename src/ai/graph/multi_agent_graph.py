@@ -76,7 +76,7 @@ class MultiAgentGraph:
         return compiled_graph
     
 
-    def execute(self, input: dict):
+    def execute(self, input: str):
         self.agent_graph_logger = AgentGraphLogger()
         start_time = time.time()
         
@@ -85,6 +85,7 @@ class MultiAgentGraph:
             compiled_graph = self.build_graph()
             
             # Execute
+            input = json.dumps({"output": input, "assignee": "Human"}, ensure_ascii=False)
             result = compiled_graph.invoke(
                 GraphState(messages=[HumanMessage(content=input)])
             )
