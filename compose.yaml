@@ -6,8 +6,19 @@ services:
       - "9000:9000"
     env_file:
       - .env
-    depends_on: # Start app after database is ready 
+    depends_on: # Start app after database and redis is ready 
       - tourist-ai-db
+      - tourist-ai-redis
+
+  tourist-ai-optimizer:
+    container_name: tourist-ai-optimizer
+    build: .
+    command: celery -A src.optimizer._celery worker --loglevel=info
+    env_file:
+      - .env
+    depends_on: # Start optimizer after database and redis is ready
+      - tourist-ai-db
+      - tourist-ai-redis
 
   tourist-ai-db:
     container_name: tourist-ai-db
@@ -19,5 +30,16 @@ services:
     volumes: # persist data
       - tourist-ai-data:/var/lib/postgresql/data
 
+  tourist-ai-redis:
+    container_name: tourist-ai-redis
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes: # persist data
+      - tourist-ai-cache:/data
+
+
 volumes:
   tourist-ai-data:
+  tourist-ai-cache:

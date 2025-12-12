@@ -29,3 +29,8 @@ class Setting(BaseSettings):
     POSTGRES_DB: SecretStr
     POSTGRES_USER: SecretStr
     POSTGRES_PASSWORD: SecretStr
+
+    # Redis
+    REDIS_HOST: SecretStr
+    REDIS_PORT: SecretStr
+    REDIS_DB: SecretStr

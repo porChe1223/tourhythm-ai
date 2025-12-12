@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker
 from config.settings import Setting
 
 
-class TouristAIDatabase():
+class TouristAIDatabase:
     """
     TouristAI Database
     ------------------
