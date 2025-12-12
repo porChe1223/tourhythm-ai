@@ -1,7 +1,6 @@
 from typing import Any, Callable
 from langchain_core.runnables import Runnable
 from langchain_core.runnables.retry import ExponentialJitterParams
-from langchain_openai import ChatOpenAI
 from langchain.agents import create_agent
 from openai import RateLimitError
 
@@ -30,7 +29,7 @@ class BaseAgent:
     def __init__(
         self,
         agent_type: AgentType,
-        model: ChatOpenAI,
+        model: Callable,
         system_prompt: str,
     ) -> None:
         self.AgentType = agent_type
@@ -46,7 +45,7 @@ class BaseAgent:
             # Create Agent
             self.Agent = create_agent(
                 name=self.AgentType,
-                model=self.Model,
+                model=self.Model(),
                 system_prompt=self.SystemPrompt,
                 tools=tool_list
             )

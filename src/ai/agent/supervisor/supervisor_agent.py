@@ -1,11 +1,16 @@
-from typing import Any, Callable
-from ai.agent._shared.base_agent import BaseAgent, RetryWrapper
-from ai.agent._shared.models import structured_openai
-from ai.agent._shared.states import NextAgentDecision
+from typing import Any
+from ai.agent._shared import BaseAgent, NextAgentDecision, RetryWrapper, structured_openai
 from ai.agent.supervisor.supervisor_prompt import SUPERVISOR_PROMPT
 
 
 class SupervisorAgent(BaseAgent):
+    """
+    SupervisorAgent
+    ---------------
+    - Agent for Supervising and Delegating Tasks
+    - Based on BaseAgent (for LangChain)
+    - Uses structured output openai model to decide next agent
+    """
     def __init__(self) -> None:
         super().__init__('Supervisor',
                          structured_openai(NextAgentDecision),

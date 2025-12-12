@@ -1,5 +1,4 @@
-from ai.agent._shared.base_agent import BaseAgent
-from ai.agent._shared.models import basic_openai
+from ai.agent._shared import BaseAgent, basic_openai
 from ai.agent.trip.trip_prompt import TRIP_PROMPT
 
 
