@@ -15,12 +15,12 @@ class BaseNode():
     
     Methods
     -------
-    - extract_user_input: Extract user input from GraphState
+    - extract_messages: Extract messages from GraphState
     - update_state: Update State with Agent output
     - process: you should Update process Method in Extended Node
     """
-    def extract_user_input(self, state: GraphState) -> str:
-        return state["messages"][-1].content
+    def extract_messages(self, state: GraphState) -> str:
+        return str([message.content for message in state["messages"]])
     
 
     def update_state(self, output: str) -> Command:

@@ -25,7 +25,7 @@ class TaskNode(BaseNode):
     
     def process(self, state: GraphState) -> Command:
         try:
-            user_input = self.extract_user_input(state)
+            user_input = self.extract_messages(state)
 
             agent_output = self.Agent.call(user_input, [tavily_research_tool])
 
@@ -52,7 +52,7 @@ class DeclarativeTaskNode(BaseNode):
 
     def process(self, state: GraphState) -> Command:
         try:
-            user_input = self.extract_user_input(state)
+            user_input = self.extract_messages(state)
 
             agent_output = self.Agent(input=user_input)
 
