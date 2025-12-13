@@ -12,7 +12,7 @@ def save_chat_data(messages: List[Any]):
     
     Args:
         user_message: The original user input
-        messages: List of messages from MultiAgentGraph.execute()
+        messages: List of messages from TouristAgentGraph.execute()
     """
     # --- Format messages ---
     formatted_messages = []

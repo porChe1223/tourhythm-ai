@@ -1,4 +1,4 @@
-from ai import MultiAgentGraph
+from ai import TouristAgentGraph
 
 
 class AIChatService:
@@ -9,7 +9,7 @@ class AIChatService:
     Use multi-agent-graph from ai/
     """
     def __init__(self):
-        self.ai_agent = MultiAgentGraph()
+        self.ai_agent = TouristAgentGraph()
     
     
     def chat(self, message: str) -> tuple[str, list]:

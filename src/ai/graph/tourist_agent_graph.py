@@ -8,10 +8,11 @@ from ai.node import DeclarativeGeneralNode, GraphState, NodeType, DeclarativeSch
 from log import AgentGraphLogger
 
 
-class MultiAgentGraph:
+class TouristAgentGraph:
     """
-    MultiAgentGraph
-    ---------------
+    TouristAgentGraph
+    -----------------
+    Graph for Multi-Agent Collaboration about Supporting Tourist
     """
 
     def __init__(self) -> None:

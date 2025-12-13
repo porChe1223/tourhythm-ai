@@ -19,12 +19,14 @@ Can Not Do
 
 Methods
 -------
-- MultiAgentGraph: Graph for Multi-Agent Collaboration
+- TouristAgentGraph: Graph for Multi-Agent Collaboration
 """
 
-from ai.graph.multi_agent_graph import MultiAgentGraph
+from ai.graph.self_improve_graph import SelfImproveGraph
+from ai.graph.tourist_agent_graph import TouristAgentGraph
 
 
 __all__ = [
-    'MultiAgentGraph',
+    'SelfImproveGraph',
+    'TouristAgentGraph',
 ]

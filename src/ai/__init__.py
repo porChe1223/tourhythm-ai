@@ -1,6 +1,7 @@
-from ai.graph import MultiAgentGraph
+from ai.graph import SelfImproveGraph, TouristAgentGraph
 
 
 __all__ = [
-    'MultiAgentGraph',
+    'SelfImproveGraph',
+    'TouristAgentGraph',
 ]
