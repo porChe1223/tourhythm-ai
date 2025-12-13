@@ -23,6 +23,7 @@ Methods
 - DeclarativeScheduleNode: Node for Suggesting Schedule Purpose using Declarative Agent
 - DeclarativeTaskNode: Node for Suggesting Tasks necessary to achieve user's goal using Declarative Agent
 - DeclarativeTripNode: Node for Suggesting Trip Purpose using Declarative Agent
+- EvaluateNode: Node for Evaluating Agent Performance
 - GeneralNode: Node for General Purpose Tasks
 - SupervisorNode: Node for Supervising Tasks
 - ScheduleNode: Node for Suggesting Schedule Purpose
@@ -30,6 +31,7 @@ Methods
 - TripNode: Node for Suggesting Trip Purpose
 """
 
+from ai.node.evaluate import EvaluateNode
 from ai.node.general import DeclarativeGeneralNode, GeneralNode
 from ai.node.schedule import DeclarativeScheduleNode, ScheduleNode
 from ai.node.supervisor import SupervisorNode
@@ -43,6 +45,7 @@ __all__ = [
     'DeclarativeScheduleNode',
     'DeclarativeTaskNode',
     'DeclarativeTripNode',
+    'EvaluateNode',
     'GeneralNode',
     'GraphState',
     'NodeType',

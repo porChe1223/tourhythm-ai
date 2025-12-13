@@ -57,6 +57,24 @@ class ChatRepository:
             raise e
     
 
+    def get_non_scored_messages(self) -> List[ChatMessage]:
+        """Get messages that have not been scored yet"""
+        try:
+            messages = (
+                self.db.query(ChatMessage)
+                .filter(ChatMessage.score == None)
+                .all()
+            )
+            
+            close_db(self.db)
+            
+            return messages
+        except Exception as e:
+            close_db(self.db)
+
+            raise e
+    
+
     def get_messages_by_assignee(self, assignee: str) -> List[ChatMessage]:
         """Get all messages by specific assignee"""
         try:

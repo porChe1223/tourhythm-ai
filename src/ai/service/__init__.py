@@ -20,9 +20,11 @@ Methods
 - tavily_research_tool: Tool for Researching via Tavily API
 """
 
-from ai.service.tools.tavily_research import tavily_research_tool
+from ai.service.database import get_non_scored_messages
+from ai.service.tools import tavily_research_tool
 
 
 __all__ = [
+    'get_non_scored_messages',
     'tavily_research_tool',
     ]
