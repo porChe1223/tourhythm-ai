@@ -27,6 +27,12 @@ class ChatRepository:
             self.db.commit()
             
             self.db.refresh(session)
+
+            if True:
+                from optimizer import self_improve
+
+
+                self_improve.delay()
             
             close_db(self.db)
             
