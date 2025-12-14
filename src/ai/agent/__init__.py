@@ -16,20 +16,9 @@ Can Not Do
 - Read/Write Outside of System (document, webpage, etc...)
 - Read/Write Node
 - Read/Write Graph
-
-Methods
--------
-- DeclarativeGeneralAgent: General Purpose Agent using Declarative Approach
-- DeclarativeScheduleAgent: Schedule Suggestion Agent using Declarative Approach
-- DeclarativeTaskAgent: Task Suggestion Agent using Declarative Approach
-- DeclarativeTripAgent: Trip Suggestion Agent using Declarative Approach
-- GeneralAgent: General Purpose Agent
-- ScheduleAgent: Schedule Suggestion Agent for suggesting schedule based on user's trip plan
-- SupervisorAgent: Managing Agent for supervising
-- TaskAgent: Task Suggestion Agent for suggesting necessary baggage/todo to achieve user's goal
-- TripAgent: Trip Suggestion Agent for suggesting trip plan based on user's preferences
 """
 
+from ai.agent.evaluation import DeclarativeEvaluationAgent
 from ai.agent.general import DeclarativeGeneralAgent, GeneralAgent
 from ai.agent.schedule import DeclarativeScheduleAgent, ScheduleAgent
 from ai.agent.supervisor import SupervisorAgent
@@ -38,6 +27,7 @@ from ai.agent.trip import DeclarativeTripAgent, TripAgent
 
 
 __all__ = [
+    'DeclarativeEvaluationAgent',
     'DeclarativeGeneralAgent',
     "DeclarativeScheduleAgent",
     "DeclarativeTaskAgent",
