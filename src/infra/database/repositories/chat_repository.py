@@ -15,6 +15,9 @@ class ChatRepository:
     - create_session: Create a new chat session
     - add_messages: Add multiple messages to chat session in batch
     - get_messages_by_assignee: Get all messages by specific assignee
+    - get_non_scored_specific_agent_messages: Get non-scored messages from specific agent type
+    - update_field: Update a single field of a message
+    - update_fields: Update multiple fields of a message at once
     """
     def __init__(self):
         self.db = DBSession()
@@ -63,14 +66,21 @@ class ChatRepository:
             raise e
     
 
-    def get_non_scored_messages(self) -> List[ChatMessage]:
-        """Get messages that have not been scored yet"""
+    def get_non_scored_specific_agent_messages(self, agent_type: str = None) -> List[ChatMessage]:
+        """Get non-scored messages from specific agent type"""
         try:
-            messages = (
+            query = (
                 self.db.query(ChatMessage)
-                .filter(ChatMessage.score == None)
-                .all()
+                .filter(
+                    ChatMessage.score == None,
+                    ChatMessage.assignee != None
+                )
             )
+            
+            if agent_type:
+                query = query.filter(ChatMessage.assignee == agent_type)
+            
+            messages = query.order_by(ChatMessage.created_at.desc()).all()
             
             close_db(self.db)
             
@@ -94,6 +104,56 @@ class ChatRepository:
             
             return messages
         except Exception as e:
+            close_db(self.db)
+
+            raise e
+    
+
+    def update_field(self, message_id: str, field_name: str, value) -> ChatMessage:
+        """Update specific field of message"""
+        try:
+            message = (
+                self.db.query(ChatMessage)
+                .filter(ChatMessage.id == message_id)
+                .first()
+            )
+            
+            if message:
+                setattr(message, field_name, value)
+                self.db.commit()
+                self.db.refresh(message)
+            
+            close_db(self.db)
+            
+            return message
+        except Exception as e:
+            self.db.rollback()
+            close_db(self.db)
+
+            raise e
+
+
+    def update_fields(self, message_id: str, fields: dict) -> ChatMessage:
+        """Update multiple fields of message at once"""
+        try:
+            message = (
+                self.db.query(ChatMessage)
+                .filter(ChatMessage.id == message_id)
+                .first()
+            )
+            
+            if message:
+                for field_name, value in fields.items():
+                    setattr(message, field_name, value)
+                
+                self.db.commit()
+                self.db.refresh(message)
+            
+            close_db(self.db)
+            
+            return message
+        except Exception as e:
+            self.db.rollback()
             close_db(self.db)
 
             raise e
