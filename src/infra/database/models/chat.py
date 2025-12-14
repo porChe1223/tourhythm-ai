@@ -53,7 +53,6 @@ class ChatMessage(Base):
     - assignee: Agent assignee ('General', 'Trip', 'Schedule', 'Task', 'Supervisor') or NULL for human
     - order_index: Order within session for restoration
     - score: Message quality score (0-10) .this score not must be 0-10 because AI evaluated
-    - score_reason: Reason for the score
     - created_at: Timestamp of creation
 
     Relationships
@@ -68,7 +67,6 @@ class ChatMessage(Base):
     assignee = Column(String(10), nullable=True, index=True)  # NULL for human messages
     order_index = Column(Integer, nullable=False)  # For maintaining message order
     score = Column(Integer, nullable=True)  # 0-10 score (Not must be 0-10 because AI evaluated)
-    score_reason = Column(Text, nullable=True)  # Reason for the score
     created_at = Column(DateTime, default=datetime.now)
     
     # Relationship

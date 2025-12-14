@@ -7,6 +7,7 @@ WORKDIR /code
 # Copy dependency files
 COPY ./requirements.txt /code/requirements.txt
 COPY ./pyproject.toml /code/pyproject.toml
+COPY ./alembic.ini /code/alembic.ini
 
 # Install dependencies
 RUN /bin/uv pip install --system --no-cache-dir -r /code/requirements.txt
