@@ -5,7 +5,7 @@ from app.schemas import ChatRequest, ChatResponse
 
 
 # Application
-app = FastAPI(title="tourist-ai", version="1.0.0")
+app = FastAPI(title="tourhysm-ai", version="1.0.0")
 
 
 # Services

@@ -73,7 +73,6 @@ def save_chat_data(messages: List[Any]):
                 assignee=msg_data['assignee'],
                 order_index=msg_data['order_index'],
                 score=None,
-                score_reason=None,
                 created_at=datetime.now()
             )
             chat_messages.append(chat_message)

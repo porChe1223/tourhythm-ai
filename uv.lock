@@ -2057,7 +2057,7 @@ wheels = [
 ]
 
 [[package]]
-name = "tourist-ai"
+name = "tourhysm-ai"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
