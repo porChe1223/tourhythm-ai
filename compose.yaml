@@ -1,6 +1,6 @@
 services:
-  tourhysm-ai:
-    container_name: tourhysm-ai
+  tourhythm-ai:
+    container_name: tourhythm-ai
     build: .
     command: sh -c """
       alembic upgrade head &&
@@ -11,39 +11,39 @@ services:
     env_file:
       - .env
     depends_on: # Start app after database and redis is ready
-      - tourhysm-ai-db
-      - tourhysm-ai-redis
+      - tourhythm-ai-db
+      - tourhythm-ai-redis
 
-  tourhysm-ai-optimizer:
-    container_name: tourhysm-ai-optimizer
+  tourhythm-ai-optimizer:
+    container_name: tourhythm-ai-optimizer
     build: .
     command: celery -A src.optimizer._celery worker --loglevel=info
     env_file:
       - .env
     depends_on: # Start optimizer after database and redis is ready
-      - tourhysm-ai-db
-      - tourhysm-ai-redis
+      - tourhythm-ai-db
+      - tourhythm-ai-redis
 
-  tourhysm-ai-db:
-    container_name: tourhysm-ai-db
+  tourhythm-ai-db:
+    container_name: tourhythm-ai-db
     image: postgres:15
     env_file:
       - .env
     ports:
       - "5432:5432"
     volumes: # persist data
-      - tourhysm-ai-data:/var/lib/postgresql/data
+      - tourhythm-ai-data:/var/lib/postgresql/data
 
-  tourhysm-ai-redis:
-    container_name: tourhysm-ai-redis
+  tourhythm-ai-redis:
+    container_name: tourhythm-ai-redis
     image: redis:7-alpine
     ports:
       - "6379:6379"
     command: redis-server --appendonly yes
     volumes: # persist data
-      - tourhysm-ai-cache:/data
+      - tourhythm-ai-cache:/data
 
 
 volumes:
-  tourhysm-ai-data:
-  tourhysm-ai-cache:
+  tourhythm-ai-data:
+  tourhythm-ai-cache:
