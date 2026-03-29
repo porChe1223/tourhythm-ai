@@ -31,12 +31,6 @@ class ChatRepository:
             
             self.db.refresh(session)
 
-            if True:
-                from optimizer import self_improve
-
-
-                self_improve.delay()
-            
             close_db(self.db)
             
             return session
@@ -103,6 +97,43 @@ class ChatRepository:
             close_db(self.db)
             
             return messages
+        except Exception as e:
+            close_db(self.db)
+
+            raise e
+    
+    
+    def get_message_pairs_by_assignee(self, assignee: str) -> List[tuple[ChatMessage, ChatMessage]]:
+        """
+        Get message pairs for training data: (first_human_message, agent_message)
+        Returns list of tuples where first element is the initial human input 
+        and second is the agent's response in that session
+        """
+        try:
+            # Get all messages from this assignee
+            agent_messages = (
+                self.db.query(ChatMessage)
+                .filter(ChatMessage.assignee == assignee)
+                .order_by(ChatMessage.session_id, ChatMessage.order_index)
+                .all()
+            )
+            
+            pairs = []
+            for agent_msg in agent_messages:
+                # Get the first message in the same session (usually Human message with assignee=NULL)
+                first_msg = (
+                    self.db.query(ChatMessage)
+                    .filter(ChatMessage.session_id == agent_msg.session_id)
+                    .order_by(ChatMessage.order_index)
+                    .first()
+                )
+                
+                if first_msg:
+                    pairs.append((first_msg, agent_msg))
+            
+            close_db(self.db)
+            
+            return pairs
         except Exception as e:
             close_db(self.db)
 
