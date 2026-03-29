@@ -13,7 +13,7 @@ celery = Celery(
     "tourist_ai",
     broker=f"redis://{host}:{port}/{db}",
     backend=f"redis://{host}:{port}/{db}",
-    include=["optimizer.tasks"]
+    include=["optimizer.main"]
 )
 
 # Configure
