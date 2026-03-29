@@ -12,14 +12,12 @@ class EvaluationSignature(dspy.Signature):
     - Defines Signature for Evaluation AI Agent using DSPy
     """
 
-    input = dspy.InputField(
+    input: str = dspy.InputField(
         desc="Evaluation context including answer",
-        type=str
     )
 
-    score = dspy.OutputField(
+    score: float = dspy.OutputField(
         desc=EVALUATION_PROMPT,
-        type=float,
     )
 
 
@@ -40,6 +38,4 @@ class DeclarativeEvaluationAgent(dspy.Module):
         with dspy.context(lm=self.lm):
             result = self.agent(input=input)
 
-        return {
-            "score": result.score
-        }
+        return result.score

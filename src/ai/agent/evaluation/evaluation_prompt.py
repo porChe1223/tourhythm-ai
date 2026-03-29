@@ -21,12 +21,12 @@ Please evaluate responses comprehensively based on the provided criteria.
 4. Does it contain unnecessary information?
 
 Evaluation Scale (0-100 points):
-- Excellent (90 points): Meets all the above requirements, detailed and practical
-- Good (70 points): Meets major requirements, but some room for improvement
-- Average (50 points): Meets basic requirements, but lacks important elements
-- Needs improvement (30 points): Does not meet important requirements
-- Inadequate (10 points): Does not meet most requirements
-This is a guideline only. Please provide a detailed evaluation considering scores around 90 points, not just the exact score.
+- Excellent: Meets all the above requirements, detailed and practical
+- Good: Meets major requirements, but some room for improvement
+- Average: Meets basic requirements, but lacks important elements
+- Needs improvement: Does not meet important requirements
+- Inadequate: Does not meet most requirements
+This is a guideline only. Please provide a detailed evaluation considering scores, not just the exact 10th score.
 
-Please respond using only a numerical value between 0-100 (decimal points allowed) in the format “Score: XX.X”.
+Please respond using only a numerical value between 0-100 (decimal points allowed). Do not include any labels or prefixes, just the number itself (e.g. 90.0).
 """
