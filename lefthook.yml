@@ -1,0 +1,8 @@
+pre-push:
+  commands:
+    test:
+      run: |
+        echo '🚀 Starting graph tests...'
+        make test-graph
+        echo '✅ Graph tests passed!'
+      stage_fixed: true
