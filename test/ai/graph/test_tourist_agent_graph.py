@@ -1,12 +1,10 @@
 import asyncio
-import json
-from langchain_core.messages import HumanMessage
 
 from ai.graph import TouristAgentGraph
 
 
 async def main():
-    input = json.dumps(HumanMessage({"output": "来週に京都に福岡から観光に行きたい。どの時間帯がおすすめ？", "assignee": "Human"}), ensure_ascii=False)
+    input = "来週に京都に福岡から観光に行きたい。どの時間帯がおすすめ？"
     
 
     multi_agent_graph = TouristAgentGraph()
