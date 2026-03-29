@@ -33,6 +33,7 @@ Methods
 
 from ai.node.evaluate import EvaluateNode
 from ai.node.general import DeclarativeGeneralNode, GeneralNode
+from ai.node.optimize import OptimizeNode
 from ai.node.schedule import DeclarativeScheduleNode, ScheduleNode
 from ai.node.supervisor import SupervisorNode
 from ai.node.states import GraphState, NodeType
@@ -49,6 +50,7 @@ __all__ = [
     'GeneralNode',
     'GraphState',
     'NodeType',
+    'OptimizeNode',
     'ScheduleNode',
     'SupervisorNode',
     'TaskNode',
