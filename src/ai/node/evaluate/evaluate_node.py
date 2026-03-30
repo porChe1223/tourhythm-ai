@@ -1,6 +1,6 @@
 from ai.node.states import GraphState
 from ai.agent.evaluation.evaluation_agent import DeclarativeEvaluationAgent
-from ai.service import get_non_scored_specific_agent_messages, update_message_score
+from ai.service import get_non_scored_specific_agent_messages, update_message_score, update_agent_average_score
 
 
 class EvaluateNode:
@@ -24,6 +24,10 @@ class EvaluateNode:
         for message in messages:
             score = evaluator(input=message.message)
             update_message_score(message.id, score)
+
+        assignees = set(m.assignee for m in messages)
+        for assignee in assignees:
+            update_agent_average_score(assignee)
 
         return {
             "status": "Evaluation process completed",

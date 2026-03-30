@@ -1,4 +1,5 @@
-from typing import List
+from typing import List, Optional
+from sqlalchemy import func
 
 from infra.database.models import ChatSession, ChatMessage
 from infra.database._database import DBSession, close_db
@@ -14,7 +15,9 @@ class ChatRepository:
     -------
     - create_session: Create a new chat session
     - add_messages: Add multiple messages to chat session in batch
+    - get_average_score_by_assignee: Get average score of scored messages by assignee
     - get_messages_by_assignee: Get all messages by specific assignee
+    - get_message_pairs_by_assignee: Get message pairs for training data: (first_human_message, agent_message)
     - get_non_scored_specific_agent_messages: Get non-scored messages from specific agent type
     - update_field: Update a single field of a message
     - update_fields: Update multiple fields of a message at once
@@ -57,6 +60,24 @@ class ChatRepository:
             self.db.rollback()
             close_db(self.db)
 
+            raise e
+    
+
+    def get_average_score_by_assignee(self, assignee: str) -> Optional[float]:
+        """Get average score of scored messages by assignee"""
+        try:
+            result = (
+                self.db.query(func.avg(ChatMessage.score))
+                .filter(
+                    ChatMessage.assignee == assignee,
+                    ChatMessage.score != None,
+                )
+                .scalar()
+            )
+            close_db(self.db)
+            return float(result) if result is not None else None
+        except Exception as e:
+            close_db(self.db)
             raise e
     
 
